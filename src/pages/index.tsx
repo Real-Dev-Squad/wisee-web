@@ -1,3 +1,3 @@
 import Homepage from "./modules/homepage";
 
-export default Homepage
+export default Homepage;
