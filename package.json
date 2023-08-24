@@ -10,7 +10,7 @@
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "prettier": "prettier --check .",
-    "prettier-fix": "prettier --write ."
+    "prettier:fix": "prettier --write ."
   },
   "dependencies": {
     "class-variance-authority": "^0.7.0",
