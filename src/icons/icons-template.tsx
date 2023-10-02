@@ -1,4 +1,4 @@
-import { cn } from "@/utils/classname.util";
+import { cn } from "@/utils/classname";
 
 import { TIcon } from "../types/icon.type";
 
