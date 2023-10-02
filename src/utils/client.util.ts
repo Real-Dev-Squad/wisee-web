@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// axios client
 const apiClient = axios.create();
 
 export const client = () => {
