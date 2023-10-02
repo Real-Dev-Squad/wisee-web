@@ -1,6 +1,6 @@
 import { cn } from "@/utils/classname.util";
 
-import { TIcon } from "../../types/icon.type";
+import { TIcon } from "../types/icon.type";
 
 export const IconsTemplate = ({ className, children, viewBox }: TIcon) => {
     return (

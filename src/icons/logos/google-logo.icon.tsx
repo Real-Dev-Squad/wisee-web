@@ -1,4 +1,4 @@
-import { TIcon } from "../../../types/icon.type";
+import { TIcon } from "../../types/icon.type";
 import { IconsTemplate } from "../icons-template";
 
 export const GoogleLogoIcon = (props: TIcon) => {

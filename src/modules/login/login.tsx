@@ -1,14 +1,23 @@
 
+import Head from "next/head"
+import { useRouter } from "next/router"
+
 import { Button } from "@/components"
 import { GoogleLogoIcon } from "@/icons/logos"
 
 export const LoginPage = () => {
+    const { push } = useRouter()
+
     const handleLogin = () => {
-        window.location.replace(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google/login`)
+        push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google/login`)
     }
 
     return (
         <>
+            <Head>
+                <title>Login - {process.env.NEXT_PUBLIC_APP_NAME}</title>
+            </Head>
+
             <header>
                 <div className="px-4 h-16 lg:px-8 flex items-center max-w-7xl mx-auto">
                     <h1 className="text-xl font-semibold text-stone-900">{process.env.NEXT_PUBLIC_APP_NAME}</h1>
