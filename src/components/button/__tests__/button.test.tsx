@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react'
+import Link from 'next/link'
+import '@testing-library/jest-dom'
 
 import { Button } from "../button"
-import '@testing-library/jest-dom'
 
 describe('Button', () => {
     it('renders a text button', () => {
@@ -34,5 +35,14 @@ describe('Button', () => {
 
         expect(button).toBeInTheDocument()
         expect(button).toBeDisabled()
+    })
+
+    it('renders a link with primary button styles', () => {
+        render(<Button asChild><Link href="/hello-world"></Link></Button>)
+        const buttonAsLink = screen.getByRole('link')
+
+        expect(buttonAsLink).toBeInTheDocument()
+        expect(buttonAsLink).toHaveClass("bg-blue-600 text-stone-50 hover:bg-blue-700 active:bg-blue-800")
+        expect(buttonAsLink).toHaveAttribute('href', '/hello-world')
     })
 })
