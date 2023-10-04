@@ -1,0 +1,5 @@
+export enum EditFormModeEnum {
+  PREVIEW = "PREVIEW",
+  EDIT = "EDIT",
+  CREATE_WITHOUT_LOGIN = "CREATE_WITHOUT_LOGIN",
+}
