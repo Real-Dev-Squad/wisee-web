@@ -14,40 +14,52 @@ enum KeyCodeEnum {
     SHIFT_LEFT = "ShiftLeft",
     SHIFT_RIGHT = "ShiftRight",
     ENTER = "Enter",
+    BACKSPACE = "Backspace",
 }
 
 type EditableDivProps = Pick<React.DOMAttributes<HTMLDivElement>, "onInput" | "onKeyDown"> & {
     placeholder?: string
     className?: string
-    onEnter?: () => void
+    onEnter?: () => void // Make this required?
+    onDelete?: () => void // Make this required?
 }
 
-const EditableDiv = ({ className, placeholder, onInput, onKeyDown, onEnter }: EditableDivProps) => {
+const EditableDiv = ({ className, placeholder, onInput, onKeyDown, onEnter, onDelete }: EditableDivProps) => {
     const [prevKey, setPrevKey] = useState("")
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+        const currentValue = e.currentTarget.innerText
         const isPrevKeyShift = prevKey === KeyCodeEnum.SHIFT_LEFT || prevKey === KeyCodeEnum.SHIFT_RIGHT
 
-        if (e.code === KeyCodeEnum.ENTER && !isPrevKeyShift) {
+        if (e.key === KeyCodeEnum.ENTER && !isPrevKeyShift) {
             e.preventDefault()
 
-            setPrevKey(e.code)
+            setPrevKey(e.key)
             onEnter && onEnter()
 
             return
         }
 
+        if (currentValue.length === 0 && e.key === KeyCodeEnum.BACKSPACE) {
+            e.preventDefault()
+
+            setPrevKey(e.key)
+            onDelete && onDelete()
+        }
+
         onKeyDown && onKeyDown(e)
-        setPrevKey(e.code)
+        setPrevKey(e.key)
     }
 
     return (
         <div
             contentEditable
+            tabIndex={0}
+            autoFocus
             placeholder={placeholder || "Type something..."}
             className={cn(
-                "w-max text-base outline-none whitespace-pre-wrap break-words text-stone-900 caret:text-stone-900 cursor-text",
-                "before:content-[attr(placeholder)] before:hidden before:transition before:text-stone-400 empty:before:block",
+                "text-base outline-none whitespace-pre-wrap break-words text-stone-900 caret:text-stone-900 cursor-text",
+                "before:content-[attr(placeholder)] before:hidden before:transition before:text-stone-400 focus:empty:before:block",
                 className
             )}
             onKeyDown={handleKeyDown}
@@ -98,7 +110,7 @@ type PageProps = {
 }
 
 export const Edit = ({ mode }: PageProps) => {
-    const { blocks, upsertBlock } = useFormBlocks((state) => ({ blocks: state.blocks, upsertBlock: state.upsertBlock }))
+    const { blocks, upsertBlock, removeBlock } = useFormBlocks((state) => ({ blocks: state.blocks, upsertBlock: state.upsertBlock, removeBlock: state.removeBlock }))
 
     const pageTitle = mode === EditFormModeEnum.CREATE_WITHOUT_LOGIN ? "Create form" : "Edit form"
 
@@ -126,11 +138,18 @@ export const Edit = ({ mode }: PageProps) => {
                                     payload: "",
                                     type: BlockTypeEnum.TEXT,
                                 })
+
+                                setTimeout(() => {
+                                    const elements = document.querySelectorAll("[contenteditable]")
+                                    const lastElement = elements[elements.length - 1] as HTMLElement
+
+                                    lastElement.focus()
+                                }, 0)
                             }}
                             onInput={(e) => {
                                 const block: TBlock = {
-                                    type: BlockTypeEnum.FORM_TITLE,
                                     id: titleBlock?.id || "",
+                                    type: BlockTypeEnum.FORM_TITLE,
                                     payload: e.currentTarget.innerText,
                                 }
 
@@ -140,13 +159,35 @@ export const Edit = ({ mode }: PageProps) => {
                     </div>
 
                     {nonTitleBlocks.map(block => (
-                        <EditableDiv key={block.id} className="mb-2" onEnter={() => {
-                            upsertBlock({
-                                id: "",
-                                payload: "",
-                                type: BlockTypeEnum.TEXT,
-                            })
-                        }} />
+                        <EditableDiv
+                            key={block.id}
+                            className="mb-2"
+                            onEnter={() => {
+                                upsertBlock({
+                                    id: "",
+                                    payload: "",
+                                    type: BlockTypeEnum.TEXT,
+                                })
+
+                                setTimeout(() => {
+                                    const elements = document.querySelectorAll("[contenteditable]")
+                                    const lastElement = elements[elements.length - 1] as HTMLElement
+
+                                    lastElement.focus()
+                                }, 0)
+                            }}
+                            onDelete={() => {
+                                const elements = document.querySelectorAll("[contenteditable]")
+                                const previousElement = elements[elements.length - 2] as HTMLElement
+
+                                window.getSelection()?.selectAllChildren(previousElement)
+                                window.getSelection()?.collapseToEnd()
+
+                                previousElement.focus()
+
+                                removeBlock(block.id)
+                            }}
+                        />
                     ))}
 
                 </div>
