@@ -58,8 +58,9 @@ const EditableDiv = ({ className, placeholder, onInput, onKeyDown, onEnter, onDe
             autoFocus
             placeholder={placeholder || "Type something..."}
             className={cn(
-                "text-base outline-none whitespace-pre-wrap break-words text-stone-900 caret:text-stone-900 cursor-text",
-                "before:content-[attr(placeholder)] before:hidden before:transition before:text-stone-400 focus:empty:before:block",
+                "text-base relative outline-none whitespace-pre-wrap break-words text-stone-900 caret:text-stone-900 cursor-text",
+                "before:content-[attr(placeholder)] before:text-stone-400 before:block before:absolute",
+                "focus:empty:before:opacity-100 before:opacity-0",
                 className
             )}
             onKeyDown={handleKeyDown}
