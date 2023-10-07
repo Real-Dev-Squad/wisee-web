@@ -17,22 +17,23 @@ export const EditableDiv = ({ id, type, className, placeholder, onInput, onKeyDo
     const [prevKey, setPrevKey] = useState("")
     const { addBlock, totalBlocks } = useEditFormStore((state) => ({ addBlock: state.addBlock, totalBlocks: state.blocks.length }))
 
+
+    // TODO: @yesyash - Clean up this function when integrating the API
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
         const currentValue = e.currentTarget.innerText
         const isPrevKeyShift = prevKey === KeyCodeEnum.SHIFT
 
+        const elements = document.querySelectorAll("[contenteditable]")
+        const currentElementIndex = Array.from(elements).findIndex((el) => el.id === id);
+
+        if (currentElementIndex === -1) {
+            return
+        }
+
         if (e.key === KeyCodeEnum.ENTER && !isPrevKeyShift) {
             e.preventDefault()
-            const elements = document.querySelectorAll("[contenteditable]")
-            const currentElementIndex = Array.from(elements).findIndex((el) => el.id === id);
+            const newBlockPosition = currentElementIndex + 1
 
-            if (currentElementIndex === -1) {
-                return
-            }
-
-            const newBlockPosition = currentElementIndex === -1 ? 0 : currentElementIndex + 1
-
-            setPrevKey(e.key)
             addBlock(newBlockPosition)
             setBlockInFocus(newBlockPosition)
             return
@@ -40,36 +41,24 @@ export const EditableDiv = ({ id, type, className, placeholder, onInput, onKeyDo
 
         if (currentValue.length === 0 && e.key === KeyCodeEnum.BACKSPACE && type !== BlockTypeEnum.FORM_TITLE) {
             e.preventDefault()
+            const previousElementIndex = currentElementIndex === 0 ? 0 : currentElementIndex - 1
 
-            setPrevKey(e.key)
+            setBlockInFocus(previousElementIndex)
+
             onDelete && onDelete()
         }
 
         if (e.key === KeyCodeEnum.ARROW_UP) {
-            const elements = document.querySelectorAll("[contenteditable]")
-            const currentElementIndex = Array.from(elements).findIndex((el) => el.id === id);
-
-            if (currentElementIndex === -1) {
-                return
-            }
-
+            e.preventDefault()
             const newBlockPosition = currentElementIndex === 0 ? 0 : currentElementIndex - 1
 
-            setPrevKey(e.key)
             setBlockInFocus(newBlockPosition)
         }
 
         if (e.key === KeyCodeEnum.ARROW_DOWN) {
-            const elements = document.querySelectorAll("[contenteditable]")
-            const currentElementIndex = Array.from(elements).findIndex((el) => el.id === id);
-
-            if (currentElementIndex === -1) {
-                return
-            }
-
+            e.preventDefault()
             const newBlockPosition = currentElementIndex === totalBlocks - 1 ? currentElementIndex : currentElementIndex + 1
 
-            setPrevKey(e.key)
             setBlockInFocus(newBlockPosition)
         }
 

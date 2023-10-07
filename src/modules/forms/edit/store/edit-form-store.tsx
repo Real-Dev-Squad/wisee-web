@@ -4,7 +4,6 @@ import { devtools } from "zustand/middleware"
 
 import { BlockTypeEnum } from "../enums"
 import { TBlock } from "../types/edit-form-types"
-import { setBlockInFocus } from "../utils"
 
 const DEFAULT_BLOCKS: TBlock[] = [
     // Using nanoId here causes an issue as the id becomes different on server and client
@@ -40,22 +39,9 @@ export const useEditFormStore = create<TBlocksStore>()(devtools((set) => ({
         }
 
         const blocks = [...state.blocks]
-        console.log(position)
         blocks.splice(position, 0, newBlock)
 
         return { blocks }
     }),
-    removeBlock: (blockId) => set((state) => {
-        const elements = document.querySelectorAll("[contenteditable]")
-        const currentElementIndex = Array.from(elements).findIndex((el) => el.id === blockId);
-        if (currentElementIndex === -1) {
-            return state
-        }
-
-        const previousElementIndex = currentElementIndex === 0 ? 0 : currentElementIndex - 1
-
-        setBlockInFocus(previousElementIndex)
-
-        return { blocks: state.blocks.filter(b => b.id !== blockId) }
-    }),
+    removeBlock: (blockId) => set((state) => ({ blocks: state.blocks.filter(b => b.id !== blockId) })),
 }), { enabled: true, name: "useFormBlocks" })) // TODO: @yesyash - Disable the devtools middleware in production
