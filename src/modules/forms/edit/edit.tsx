@@ -10,9 +10,8 @@ type PageProps = {
 }
 
 export const Edit = ({ mode }: PageProps) => {
-    const { blocks, removeBlock } = useEditFormStore((state) => ({
+    const { blocks } = useEditFormStore((state) => ({
         blocks: state.blocks,
-        removeBlock: state.removeBlock
     }))
 
     const pageTitle = mode === EditFormModeEnum.CREATE_WITHOUT_LOGIN ? "Create form" : "Edit form"
@@ -34,7 +33,6 @@ export const Edit = ({ mode }: PageProps) => {
                             {...block}
                             className={block.type === BlockTypeEnum.FORM_TITLE ? "text-4xl font-bold empty:before:block" : "mb-2"}
                             placeholder={block.type === BlockTypeEnum.FORM_TITLE ? "Form title" : "Type something..."}
-                            onDelete={() => removeBlock(block.id)}
                         />
                     ))}
 

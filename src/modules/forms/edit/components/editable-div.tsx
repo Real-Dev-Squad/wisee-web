@@ -10,12 +10,11 @@ import { setBlockInFocus } from "../utils"
 type EditableDivProps = Pick<React.DOMAttributes<HTMLDivElement>, "onInput" | "onKeyDown"> & TBlock & {
     placeholder?: string
     className?: string
-    onDelete?: () => void // Make this required?
 }
 
-export const EditableDiv = ({ id, type, className, placeholder, onInput, onKeyDown, onDelete }: EditableDivProps) => {
+export const EditableDiv = ({ id, type, className, placeholder, onInput, onKeyDown }: EditableDivProps) => {
     const [prevKey, setPrevKey] = useState("")
-    const { addBlock, totalBlocks } = useEditFormStore((state) => ({ addBlock: state.addBlock, totalBlocks: state.blocks.length }))
+    const { totalBlocks, addBlock, deleteBlock } = useEditFormStore((state) => ({ totalBlocks: state.blocks.length, addBlock: state.addBlock, deleteBlock: state.removeBlock }))
 
 
     // TODO: @yesyash - Clean up this function when integrating the API
@@ -45,7 +44,7 @@ export const EditableDiv = ({ id, type, className, placeholder, onInput, onKeyDo
 
             setBlockInFocus(previousElementIndex)
 
-            onDelete && onDelete()
+            deleteBlock(id)
         }
 
         if (e.key === KeyCodeEnum.ARROW_UP) {
