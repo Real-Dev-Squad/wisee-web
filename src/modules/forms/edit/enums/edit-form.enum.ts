@@ -8,6 +8,8 @@ export enum KeyCodeEnum {
   SHIFT = "Shift",
   ENTER = "Enter",
   BACKSPACE = "Backspace",
+  ARROW_UP = "ArrowUp",
+  ARROW_DOWN = "ArrowDown",
 }
 
 export enum BlockTypeEnum {
