@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { cn } from "@/utils/classname"
 
@@ -7,14 +7,45 @@ import { useEditFormStore } from "../store"
 import { TBlock } from "../types/edit-form-types"
 import { setBlockInFocus } from "../utils"
 
+import { FormOptions } from "./form-options"
+
+// This data will come from the API once we integrate it
+const DEFAULT_FORM_TYPES = [
+    { id: BlockTypeEnum.EMAIL, value: "Email" },
+    { id: BlockTypeEnum.SHORT_TEXT, value: "Short Text" },
+    { id: BlockTypeEnum.LONG_TEXT, value: "Long Text" },
+]
+
 type EditableDivProps = Pick<React.DOMAttributes<HTMLDivElement>, "onInput" | "onKeyDown"> & TBlock & {
     placeholder?: string
     className?: string
+    payload: TBlock['payload']
 }
 
-export const EditableDiv = ({ id, type, className, placeholder, onInput, onKeyDown }: EditableDivProps) => {
+export const EditableDiv = ({ id, type, payload, className, placeholder, onInput, onKeyDown }: EditableDivProps) => {
+    const ref = useRef<HTMLDivElement>(null)
     const [prevKey, setPrevKey] = useState("")
-    const { totalBlocks, addBlock, deleteBlock } = useEditFormStore((state) => ({ totalBlocks: state.blocks.length, addBlock: state.addBlock, deleteBlock: state.removeBlock }))
+
+    const { totalBlocks, addBlock, deleteBlock } = useEditFormStore((state) => ({
+        totalBlocks: state.blocks.length,
+        addBlock: state.addBlock,
+        deleteBlock: state.removeBlock,
+    }))
+
+    useEffect(() => {
+        const inputRef = ref.current
+        if (!inputRef) return
+
+        if (type === BlockTypeEnum.TEXT) {
+            inputRef.innerHTML = payload.data
+        }
+
+        inputRef.innerHTML = payload.placeholder
+
+    }, [])
+
+
+    const showFormOptions = payload === "/" && type === BlockTypeEnum.TEXT
 
 
     // TODO: @yesyash - Clean up this function when integrating the API
@@ -66,21 +97,31 @@ export const EditableDiv = ({ id, type, className, placeholder, onInput, onKeyDo
     }
 
     return (
-        <div
-            id={id}
-            contentEditable
-            tabIndex={0}
-            autoFocus
-            placeholder={placeholder}
-            className={cn(
-                "text-base relative outline-none whitespace-pre-wrap break-words text-stone-900 caret:text-stone-900 cursor-text",
-                "before:content-[attr(placeholder)] before:text-stone-400 before:absolute",
-                "focus:empty:before:block before:hidden",
-                type === BlockTypeEnum.FORM_TITLE && "pb-8",
-                className
-            )}
-            onKeyDown={handleKeyDown}
-            onInput={onInput}
-        />
+        <div className="relative">
+            <div
+                ref={ref}
+                id={id}
+                contentEditable
+                tabIndex={0}
+                autoFocus
+                placeholder={placeholder}
+                className={cn(
+                    "text-base relative outline-none whitespace-pre-wrap break-words text-stone-900 caret:text-stone-900 cursor-text",
+                    "before:content-[attr(placeholder)] before:text-stone-400 before:absolute",
+                    "focus:empty:before:block before:hidden",
+                    type === BlockTypeEnum.FORM_TITLE && "pb-8",
+                    className
+                )}
+                onKeyDown={handleKeyDown}
+                onInput={onInput}
+            />
+
+            <FormOptions
+                open={showFormOptions}
+                value="option 1"
+                options={DEFAULT_FORM_TYPES}
+                onChange={(value) => console.log(value)}
+            />
+        </div>
     )
 }

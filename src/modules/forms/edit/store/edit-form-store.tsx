@@ -7,7 +7,7 @@ import { TBlock } from "../types/edit-form-types"
 
 const DEFAULT_BLOCKS: TBlock[] = [
     // Using nanoId here causes an issue as the id becomes different on server and client
-    { id: "form_title", payload: "", type: BlockTypeEnum.FORM_TITLE },
+    { id: "form_title", payload: { data: '', placeholder: '' }, type: BlockTypeEnum.FORM_TITLE },
 ]
 
 type TBlocksStore = {
@@ -15,6 +15,7 @@ type TBlocksStore = {
     editBlock: (block: TBlock) => void
     addBlock: (position: number) => void
     removeBlock: (blockId: string) => void
+    updateBlock: (blockId: string, payload: TBlock['payload']) => void
 }
 
 export const useEditFormStore = create<TBlocksStore>()(devtools((set) => ({
@@ -34,7 +35,7 @@ export const useEditFormStore = create<TBlocksStore>()(devtools((set) => ({
     addBlock: (position) => set((state) => {
         const newBlock = {
             id: nanoid(),
-            payload: "",
+            payload: { data: '', placeholder: '' },
             type: BlockTypeEnum.TEXT,
         }
 
@@ -44,4 +45,16 @@ export const useEditFormStore = create<TBlocksStore>()(devtools((set) => ({
         return { blocks }
     }),
     removeBlock: (blockId) => set((state) => ({ blocks: state.blocks.filter(b => b.id !== blockId) })),
+    updateBlock: (blockId, payload) => set((state) => {
+        const blockIndex = state.blocks.findIndex((b) => b.id === blockId)
+
+        if (blockIndex === -1) {
+            return state
+        }
+
+        const blocks = [...state.blocks]
+        blocks[blockIndex].payload = payload
+
+        return { blocks }
+    })
 }), { enabled: true, name: "useFormBlocks" })) // TODO: @yesyash - Disable the devtools middleware in production

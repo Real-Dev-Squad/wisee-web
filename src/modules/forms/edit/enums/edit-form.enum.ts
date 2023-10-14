@@ -15,4 +15,7 @@ export enum KeyCodeEnum {
 export enum BlockTypeEnum {
   FORM_TITLE = "FORM_TITLE",
   TEXT = "TEXT",
+  EMAIL = "EMAIL",
+  SHORT_TEXT = "SHORT_TEXT",
+  LONG_TEXT = "LONG_TEXT",
 }
