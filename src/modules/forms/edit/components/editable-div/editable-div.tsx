@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react"
 
 import { cn } from "@/utils/classname"
 
-import { BlockTypeEnum, KeyCodeEnum } from "../enums"
-import { useEditFormStore } from "../store"
-import { TBlock } from "../types/edit-form-types"
-import { setBlockInFocus } from "../utils"
+import { BlockTypeEnum, KeyCodeEnum } from "../../enums"
+import { useEditFormStore } from "../../store"
+import { TBlock } from "../../types/edit-form-types"
+import { setBlockInFocus } from "../../utils"
 
 type EditableDivProps = Pick<React.DOMAttributes<HTMLDivElement>, "onInput" | "onKeyDown"> & TBlock & {
     placeholder?: string
@@ -56,7 +56,7 @@ export const EditableDiv = ({ id, type, payload, className, placeholder, onInput
             return
         }
 
-        if (currentValue.length === 0 && e.key === KeyCodeEnum.BACKSPACE && type !== BlockTypeEnum.FORM_TITLE) {
+        if (currentValue?.length === 0 && e.key === KeyCodeEnum.BACKSPACE && type !== BlockTypeEnum.FORM_TITLE) {
             e.preventDefault()
             const previousElementIndex = currentElementIndex === 0 ? 0 : currentElementIndex - 1
 

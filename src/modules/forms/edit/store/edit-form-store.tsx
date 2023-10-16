@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid"
 import { create } from "zustand"
 import { devtools } from "zustand/middleware"
 
@@ -34,7 +33,7 @@ export const useEditFormStore = create<TBlocksStore>()(devtools((set) => ({
     }),
     addBlock: (position) => set((state) => {
         const newBlock = {
-            id: nanoid(),
+            id: Math.random().toString(),
             payload: { data: '', placeholder: '' },
             type: BlockTypeEnum.TEXT,
         }
