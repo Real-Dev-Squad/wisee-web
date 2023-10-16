@@ -10,7 +10,7 @@ type PageProps = {
 }
 
 export const Edit = ({ mode }: PageProps) => {
-    const { blocks, updateBlock } = useEditFormStore((state) => ({
+    const { blocks } = useEditFormStore((state) => ({
         blocks: state.blocks,
         updateBlock: state.updateBlock
     }))
@@ -36,7 +36,6 @@ export const Edit = ({ mode }: PageProps) => {
                             type={block.type}
                             className={block.type === BlockTypeEnum.FORM_TITLE ? "text-4xl font-bold empty:before:block" : "mb-2"}
                             placeholder={block.type === BlockTypeEnum.FORM_TITLE ? "Form title" : "Type something..."}
-                        // onInput={(e) => updateBlock(block.id, {})}
                         />
                     ))}
 

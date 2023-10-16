@@ -57,4 +57,4 @@ export const useEditFormStore = create<TBlocksStore>()(devtools((set) => ({
 
         return { blocks }
     })
-}), { enabled: true, name: "useFormBlocks" })) // TODO: @yesyash - Disable the devtools middleware in production
+}), { enabled: true, name: "useFormStore" })) // TODO: @yesyash - Disable the devtools middleware in production

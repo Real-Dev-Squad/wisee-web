@@ -7,15 +7,6 @@ import { useEditFormStore } from "../store"
 import { TBlock } from "../types/edit-form-types"
 import { setBlockInFocus } from "../utils"
 
-import { FormOptions } from "./form-options"
-
-// This data will come from the API once we integrate it
-const DEFAULT_FORM_TYPES = [
-    { id: BlockTypeEnum.EMAIL, value: "Email" },
-    { id: BlockTypeEnum.SHORT_TEXT, value: "Short Text" },
-    { id: BlockTypeEnum.LONG_TEXT, value: "Long Text" },
-]
-
 type EditableDivProps = Pick<React.DOMAttributes<HTMLDivElement>, "onInput" | "onKeyDown"> & TBlock & {
     placeholder?: string
     className?: string
@@ -45,10 +36,6 @@ export const EditableDiv = ({ id, type, payload, className, placeholder, onInput
     }, [])
 
 
-    const showFormOptions = payload === "/" && type === BlockTypeEnum.TEXT
-
-
-    // TODO: @yesyash - Clean up this function when integrating the API
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
         const currentValue = e.currentTarget.innerText
         const isPrevKeyShift = prevKey === KeyCodeEnum.SHIFT
@@ -114,13 +101,6 @@ export const EditableDiv = ({ id, type, payload, className, placeholder, onInput
                 )}
                 onKeyDown={handleKeyDown}
                 onInput={onInput}
-            />
-
-            <FormOptions
-                open={showFormOptions}
-                value="option 1"
-                options={DEFAULT_FORM_TYPES}
-                onChange={(value) => console.log(value)}
             />
         </div>
     )
