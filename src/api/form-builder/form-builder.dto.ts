@@ -13,4 +13,4 @@ export type FromDto = {
   updated_at: string;
 };
 
-export type GetAllFormsResponseDto = CommonResponseDto<FromDto>;
+export type GetAllFormsResponseDto = CommonResponseDto<FromDto[]>;
