@@ -8,7 +8,7 @@ export const SignUpPage = () => {
     const { push } = useRouter()
 
     const handleSignUp = () => {
-        push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google/login`)
+        push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/v1/auth/google/login`)
     }
 
     return (
