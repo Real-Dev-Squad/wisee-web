@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 
 import { ROUTES } from '@/routes'
-import { formatRoute } from '@/utils/format-route/form-route.util'
+import { formatRoute } from '@/utils/format-route/format-route.util'
 
 import { FormCard } from '../form-card'
 

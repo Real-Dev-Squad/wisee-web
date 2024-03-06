@@ -1,4 +1,4 @@
-import { formatRoute } from "./form-route.util";
+import { formatRoute } from "./format-route.util";
 
 describe("formatRoute", () => {
     it("should replace placeholders in a route string with provided parameters", () => {

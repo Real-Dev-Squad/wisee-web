@@ -2,7 +2,7 @@ import Link from "next/link"
 
 import { TForm } from "@/api/form-builder/form-builder.types"
 import { ROUTES } from "@/routes"
-import { formatRoute } from "@/utils/format-route/form-route.util"
+import { formatRoute } from "@/utils/format-route/format-route.util"
 
 type Props = Pick<TForm, "id" | 'status' | 'updated_at'> & {
     title: string // TODO: @yesyash - add this to api response
