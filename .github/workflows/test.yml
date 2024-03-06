@@ -26,7 +26,7 @@ jobs:
             - name: Load env
               run: |
                   set -a
-                  . ../environments/test.env
+                  . ./environments/test.env
                   set +a
 
             - run: npm run test:ci
