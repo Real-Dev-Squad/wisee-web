@@ -2,24 +2,10 @@ import { Plus } from "lucide-react"
 import Head from "next/head"
 import Link from "next/link"
 
-import { Button, Input } from "@/components"
+import { Button } from "@/components"
 import { Sidebar } from "@/components/sidebar"
-import { cn } from "@/utils/classname"
 
-type HeaderProps = {
-    className?: string
-}
-
-const Header = ({ className }: HeaderProps) => {
-    return (
-        <div className={cn("flex items-center justify-end gap-4", className)}>
-            <Input placeholder="Search" className="w-72" />
-            <Button size="sm" className="shrink-0">
-                <Plus /> Create Form
-            </Button>
-        </div>
-    )
-}
+import { DashboardHeader } from "./components"
 
 const FormCard = () => {
     return (
@@ -52,7 +38,7 @@ export const Dashboard = () => {
                 </div>
 
                 <section className="bg-white h-full flex-1 w-full overflow-auto px-4">
-                    <Header className="pt-4 pb-5" />
+                    <DashboardHeader className="pt-4 pb-5" />
 
                     <div className="px-4 pb-16 space-y-1">
                         {new Array(5).fill(0).map((_, i) => <FormCard key={i} />)}
