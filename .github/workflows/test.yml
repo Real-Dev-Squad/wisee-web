@@ -23,10 +23,7 @@ jobs:
             - name: Install dependencies
               run: npm i
 
-            - name: Load env
+            - name: Load env & run tests
               run: |
-                  set -a
                   . ./environments/test.env
-                  set +a
-
-            - run: npm run test:ci
+                  npm run test:ci
