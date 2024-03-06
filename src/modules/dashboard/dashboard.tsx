@@ -7,24 +7,6 @@ import { Sidebar } from "@/components/sidebar"
 
 import { DashboardHeader, FormCard } from "./components"
 
-// const FormCard = () => {
-//     return (
-//         <div className="space-y-1 py-5 px-6 hover:bg-stone-100 transition rounded-lg cursor-default">
-//             <div className="flex items-center gap-4">
-//                 <h1 className="text-2xl text-stone-950 font-semibold">
-//                     <Link href="/">
-//                         From title here
-//                     </Link>
-//                 </h1>
-
-//                 <span className="uppercase text-xs text-stone-500 rounded bg-stone-100 font-semibold px-2 py-1">draft</span>
-//             </div>
-
-//             <p className="text-stone-400 text-sm">Edited 12hours ago</p>
-//         </div>
-//     )
-// }
-
 export const Dashboard = () => {
     return (
         <>
