@@ -1,6 +1,9 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 
+import { ROUTES } from '@/routes'
+import { formatRoute } from '@/utils/format-route/form-route.util'
+
 import { FormCard } from '../form-card'
 
 describe('Form Card', () => {
@@ -20,6 +23,6 @@ describe('Form Card', () => {
         expect(element).toHaveTextContent('dummy form title')
         expect(element).toHaveTextContent('draft')
         expect(element).toHaveTextContent('Edited 12hours ago')
-        expect(anchorLink).toHaveAttribute('href', '/1')
+        expect(anchorLink).toHaveAttribute('href', formatRoute(ROUTES.forms.edit, { id: 1 }))
     })
 })
