@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 
-import { DashboardHeader } from '..'
+import { DashboardHeader } from '../dashboard-header'
 
-describe('DashboardHeader', () => {
+describe('Dashboard Header', () => {
     it('renders the header correctly', () => {
         render(<DashboardHeader />)
 

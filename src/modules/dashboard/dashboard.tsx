@@ -5,25 +5,25 @@ import Link from "next/link"
 import { Button } from "@/components"
 import { Sidebar } from "@/components/sidebar"
 
-import { DashboardHeader } from "./components"
+import { DashboardHeader, FormCard } from "./components"
 
-const FormCard = () => {
-    return (
-        <div className="space-y-1 py-5 px-6 hover:bg-stone-100 transition rounded-lg cursor-default">
-            <div className="flex items-center gap-4">
-                <h1 className="text-2xl text-stone-950 font-semibold">
-                    <Link href="/">
-                        From title here
-                    </Link>
-                </h1>
+// const FormCard = () => {
+//     return (
+//         <div className="space-y-1 py-5 px-6 hover:bg-stone-100 transition rounded-lg cursor-default">
+//             <div className="flex items-center gap-4">
+//                 <h1 className="text-2xl text-stone-950 font-semibold">
+//                     <Link href="/">
+//                         From title here
+//                     </Link>
+//                 </h1>
 
-                <span className="uppercase text-xs text-stone-500 rounded bg-stone-100 font-semibold px-2 py-1">draft</span>
-            </div>
+//                 <span className="uppercase text-xs text-stone-500 rounded bg-stone-100 font-semibold px-2 py-1">draft</span>
+//             </div>
 
-            <p className="text-stone-400 text-sm">Edited 12hours ago</p>
-        </div>
-    )
-}
+//             <p className="text-stone-400 text-sm">Edited 12hours ago</p>
+//         </div>
+//     )
+// }
 
 export const Dashboard = () => {
     return (
@@ -41,7 +41,7 @@ export const Dashboard = () => {
                     <DashboardHeader className="pt-4 pb-5" />
 
                     <div className="px-4 pb-16 space-y-1">
-                        {new Array(5).fill(0).map((_, i) => <FormCard key={i} />)}
+                        {new Array(5).fill(0).map((_, i) => <FormCard key={i} id={2} status="draft" title="hello" updated_at="12hours ago" />)}
                     </div>
 
                     <div className="px-6">
