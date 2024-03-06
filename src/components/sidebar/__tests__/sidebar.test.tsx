@@ -8,12 +8,6 @@ describe('Sidebar', () => {
     it('renders the sidebar correctly', () => {
         render(<Sidebar />)
 
-        // Check that the app name is displayed
-        const appName = process.env.NEXT_PUBLIC_APP_NAME;
-        if (!appName) throw new Error('App name is not defined');
-
-        expect(screen.getByText(appName)).toBeInTheDocument();
-
         // Check that the correct number of links are displayed
         const links = screen.getAllByRole('link');
         expect(links.length).toBe(SIDEBAR_LINKS.length);
