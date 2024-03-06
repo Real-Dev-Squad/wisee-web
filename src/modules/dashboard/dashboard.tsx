@@ -3,6 +3,7 @@ import Head from "next/head"
 import Link from "next/link"
 
 import { Button, Input } from "@/components"
+import { Sidebar } from "@/components/sidebar"
 import { cn } from "@/utils/classname"
 
 type HeaderProps = {
@@ -20,42 +21,20 @@ const Header = ({ className }: HeaderProps) => {
     )
 }
 
-const Sidebar = () => {
-    return (
-        <nav className="w-full p-4">
-            <h1 className="text-2xl px-2 pb-6 font-semibold text-gray-900">Wisee</h1>
-
-            <ul className="w-full space-y-2">
-                <li className="w-full">
-                    <Link href="/dashboard" className="px-3 py-1 text-gray-500 block rounded hover:bg-gray-200 hover:text-gray-700 transition">
-                        Home
-                    </Link>
-                </li>
-
-                <li className="w-full">
-                    <Link href="/dashboard" className="px-3 py-1 text-gray-500 block rounded hover:bg-gray-200 hover:text-gray-700 transition">
-                        Settings
-                    </Link>
-                </li>
-            </ul>
-        </nav>
-    )
-}
-
 const FormCard = () => {
     return (
-        <div className="space-y-1 py-5 px-6 hover:bg-gray-100 transition rounded-lg cursor-default">
+        <div className="space-y-1 py-5 px-6 hover:bg-stone-100 transition rounded-lg cursor-default">
             <div className="flex items-center gap-4">
-                <h1 className="text-2xl text-gray-950 font-semibold">
+                <h1 className="text-2xl text-stone-950 font-semibold">
                     <Link href="/">
                         From title here
                     </Link>
                 </h1>
 
-                <span className="uppercase text-xs text-gray-500 rounded bg-gray-100 font-semibold px-2 py-1">draft</span>
+                <span className="uppercase text-xs text-stone-500 rounded bg-stone-100 font-semibold px-2 py-1">draft</span>
             </div>
 
-            <p className="text-gray-400 text-sm">Edited 12hours ago</p>
+            <p className="text-stone-400 text-sm">Edited 12hours ago</p>
         </div>
     )
 }
@@ -67,8 +46,8 @@ export const Dashboard = () => {
                 <title>Dashboard - {process.env.NEXT_PUBLIC_APP_NAME}</title>
             </Head>
 
-            <main className="bg-gray-50 w-ful h-screen flex">
-                <div className="w-60 h-full border-r border-gray-200">
+            <main className="bg-stone-50 w-ful h-screen flex">
+                <div className="w-60 h-full border-r border-stone-200">
                     <Sidebar />
                 </div>
 
@@ -80,8 +59,8 @@ export const Dashboard = () => {
                     </div>
 
                     <div className="px-6">
-                        <Button asChild variant="ghost" size="lg" className="px-4 [&>svg]:w-7 [&>svg]:h-7">
-                            <Link href="/create" className="flex items-center gap-2 text-2xl text-gray-300 hover:text-gray-400 transition hover:bg-gray-100 py-2 px-3 w-max rounded-lg">
+                        <Button asChild variant="ghost" size="lg" className="px-4 text-2xl [&>svg]:w-7 [&>svg]:h-7">
+                            <Link href="/create" className="flex items-center gap-2 text-stone-300 hover:text-stone-400 transition hover:bg-stone-100 py-2 px-3 w-max rounded-lg">
                                 <Plus />
                                 <span className="font-medium">Create Form</span>
                             </Link>
