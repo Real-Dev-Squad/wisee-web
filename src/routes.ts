@@ -3,5 +3,6 @@ export const ROUTES = {
     forms: {
         root: "/forms",
         create: "/create",
+        edit: "/forms/:id/edit",
     },
 } as const;
