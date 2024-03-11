@@ -1,11 +1,11 @@
-import { Plus } from "lucide-react"
-import Head from "next/head"
-import Link from "next/link"
+import { Plus } from 'lucide-react'
+import Head from 'next/head'
+import Link from 'next/link'
 
-import { Button } from "@/components"
-import { Navbar } from "@/components/navbar"
+import { Button } from '@/components'
+import { Navbar } from '@/components/navbar'
 
-import { DashboardHeader, FormCard } from "./components"
+import { DashboardHeader, FormCard } from './components'
 
 export const Dashboard = () => {
     return (
@@ -14,21 +14,35 @@ export const Dashboard = () => {
                 <title>Dashboard - {process.env.NEXT_PUBLIC_APP_NAME}</title>
             </Head>
 
-            <main className="bg-stone-50 w-ful h-screen flex">
-                <div className="w-60 h-full border-r border-stone-200">
-                    <Navbar />
-                </div>
+            <main className="w-ful flex h-screen bg-stone-50">
+                <Navbar />
 
-                <section className="bg-white h-full flex-1 w-full overflow-auto px-4">
-                    <DashboardHeader className="pt-4 pb-5" />
+                <section className="h-full w-full flex-1 overflow-auto bg-white px-4">
+                    <DashboardHeader className="pb-5 pt-4" />
 
-                    <div className="px-4 pb-16 space-y-1">
-                        {new Array(5).fill(0).map((_, i) => <FormCard key={i} id={2} status="draft" title="hello" updated_at="12hours ago" />)}
+                    <div className="space-y-1 px-4 pb-16">
+                        {new Array(5).fill(0).map((_, i) => (
+                            <FormCard
+                                key={i}
+                                id={2}
+                                status="draft"
+                                title="hello"
+                                updated_at="12hours ago"
+                            />
+                        ))}
                     </div>
 
                     <div className="px-6">
-                        <Button asChild variant="ghost" size="lg" className="px-4 text-2xl [&>svg]:w-7 [&>svg]:h-7">
-                            <Link href="/create" className="flex items-center gap-2 text-stone-300 hover:text-stone-400 transition hover:bg-stone-100 py-2 px-3 w-max rounded-lg">
+                        <Button
+                            asChild
+                            variant="ghost"
+                            size="lg"
+                            className="px-4 text-2xl [&>svg]:h-7 [&>svg]:w-7"
+                        >
+                            <Link
+                                href="/create"
+                                className="flex w-max items-center gap-2 rounded-lg px-3 py-2 text-stone-300 transition hover:bg-stone-100 hover:text-stone-400"
+                            >
                                 <Plus />
                                 <span className="font-medium">Create Form</span>
                             </Link>
