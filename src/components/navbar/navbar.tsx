@@ -1,11 +1,11 @@
 import Link from "next/link"
 
-import { SIDEBAR_LINKS } from "./sidebar.constants"
-import { TSidebarLink } from "./sidebar.types"
+import { NAVBAR_LINKS } from "./navbar.constants"
+import { TNavbarLink } from "./navbar.types"
 
-type SidebarLinkProps = TSidebarLink
+type NavbarLinkProps = TNavbarLink
 
-const SidebarLink = ({ href, title }: SidebarLinkProps) => {
+const NavbarLink = ({ href, title }: NavbarLinkProps) => {
     return (
         <Link href={href} className="px-3 py-1 text-stone-500 block rounded hover:bg-stone-200 hover:text-stone-700 transition">
             {title}
@@ -13,7 +13,7 @@ const SidebarLink = ({ href, title }: SidebarLinkProps) => {
     )
 }
 
-export const Sidebar = () => {
+export const Navbar = () => {
     const appName = process.env.NEXT_PUBLIC_APP_NAME
 
     return (
@@ -21,9 +21,9 @@ export const Sidebar = () => {
             <h1 className="text-2xl px-2 pb-6 font-semibold text-stone-900">{appName}</h1>
 
             <ul className="w-full space-y-2">
-                {SIDEBAR_LINKS.map((link, index) => (
+                {NAVBAR_LINKS.map((link, index) => (
                     <li key={index} className="w-full">
-                        <SidebarLink title={link.title} href={link.href} />
+                        <NavbarLink title={link.title} href={link.href} />
                     </li>
                 ))}
 

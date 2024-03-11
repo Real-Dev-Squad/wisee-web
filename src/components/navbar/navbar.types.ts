@@ -1,4 +1,4 @@
-export type TSidebarLink = {
+export type TNavbarLink = {
     title: string;
     href: string;
 };

@@ -3,7 +3,7 @@ import Head from "next/head"
 import Link from "next/link"
 
 import { Button } from "@/components"
-import { Sidebar } from "@/components/sidebar"
+import { Navbar } from "@/components/navbar"
 
 import { DashboardHeader, FormCard } from "./components"
 
@@ -16,7 +16,7 @@ export const Dashboard = () => {
 
             <main className="bg-stone-50 w-ful h-screen flex">
                 <div className="w-60 h-full border-r border-stone-200">
-                    <Sidebar />
+                    <Navbar />
                 </div>
 
                 <section className="bg-white h-full flex-1 w-full overflow-auto px-4">
