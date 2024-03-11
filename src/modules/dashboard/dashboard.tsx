@@ -1,11 +1,11 @@
-import { Plus } from 'lucide-react'
-import Head from 'next/head'
-import Link from 'next/link'
+import { Plus } from "lucide-react"
+import Head from "next/head"
+import Link from "next/link"
 
-import { Button } from '@/components'
-import { Navbar } from '@/components/navbar'
+import { Button } from "@/components"
+import { Navbar } from "@/components/navbar"
 
-import { DashboardHeader, FormCard } from './components'
+import { DashboardHeader, FormCard } from "./components"
 
 export const Dashboard = () => {
     return (

@@ -21,9 +21,7 @@ export const Navbar = () => {
 
     return (
         <nav className="fixed bottom-0 left-0 h-full w-full border-r border-stone-200 px-2 py-4 xl:w-60">
-            <h1 className="px-2 pb-6 text-2xl font-semibold text-stone-900">
-                {appName}
-            </h1>
+            <h1 className="px-2 pb-6 text-2xl font-semibold text-stone-900">{appName}</h1>
 
             <ul className="w-full space-y-2">
                 {NAVBAR_LINKS.map((link, index) => (
