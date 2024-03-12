@@ -1,6 +1,8 @@
+import dayjs from "dayjs"
 import Link from "next/link"
 
 import { TForm } from "@/api/form-builder/form-builder.types"
+import { DateTimeFormatEnum } from "@/enums/datetime-format.enum"
 import { ROUTES } from "@/routes"
 import { formatRoute } from "@/utils/format-route/format-route.util"
 
@@ -11,7 +13,7 @@ type Props = Pick<TForm, "id" | "status" | "updated_at"> & {
 export const FormCard = ({ id, title, status, updated_at }: Props) => {
     return (
         <div
-            data-testid="form_card"
+            data-testid="formCard"
             className="cursor-default space-y-1 rounded-lg py-2 transition lg:px-6 lg:py-4 lg:hover:bg-stone-100"
         >
             <div className="flex items-center gap-2 lg:gap-4">
@@ -27,7 +29,9 @@ export const FormCard = ({ id, title, status, updated_at }: Props) => {
                 </span>
             </div>
 
-            <p className="text-sm text-stone-400">{updated_at}</p>
+            <p data-testid="updatedAtTime" className="text-sm text-stone-400">
+                {dayjs(updated_at).format(DateTimeFormatEnum.ddMmYyyWithSlash)}
+            </p>
         </div>
     )
 }

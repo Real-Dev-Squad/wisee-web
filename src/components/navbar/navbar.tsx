@@ -14,6 +14,8 @@ const NavbarLink = ({ href, title, isActive }: NavbarLinkProps) => {
     return (
         <Link
             href={href}
+            data-isactive={isActive}
+            data-testid={title.toLowerCase()}
             className={cn(
                 "block rounded-full border border-transparent px-3 py-1 text-stone-500 transition hover:bg-stone-100 hover:text-stone-700",
                 "lg:rounded-lg lg:shadow-none",
