@@ -16,10 +16,10 @@ export const DashboardTemplate = ({ title, children }: Props) => {
                 <title>{title}</title>
             </Head>
 
-            <main className="w-ful flex h-screen">
+            <main className="flex h-screen w-full">
                 <Navbar />
 
-                {children}
+                <div className="flex flex-1 flex-col">{children}</div>
             </main>
         </div>
     )

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { Plus } from "lucide-react"
+import { FilePlus, Plus, PlusIcon } from "lucide-react"
 import Link from "next/link"
 
 import { FormBuilderApi } from "@/api/form-builder/form-builder.api"
@@ -10,6 +10,23 @@ import { Shimmer } from "@/components/shimmer"
 import { DashboardTemplate } from "../common/tempaltes/dashboard-template"
 
 import { DashboardHeader, FormCard } from "./components"
+
+const EmptyState = () => {
+    return (
+        <div className="flex flex-col items-center justify-center">
+            <div className="mb-4 w-max rounded-lg bg-stone-100 p-2 text-stone-700">
+                <FilePlus className="h-10 w-10" strokeWidth={1.5} />
+            </div>
+
+            <h3 className="pb-1 text-lg font-semibold text-stone-800">No forms yet</h3>
+            <p className="pb-5 text-center text-sm text-stone-500">Looks empty here, let&apos;s create a new form.</p>
+            <Button size="sm">
+                <PlusIcon />
+                Create form
+            </Button>
+        </div>
+    )
+}
 
 export const Dashboard = () => {
     const { data, isLoading, isError } = useQuery({
@@ -43,8 +60,21 @@ export const Dashboard = () => {
     if (isError) {
         return (
             <DashboardTemplate title={pageTitle}>
-                <section className="grid w-full place-items-center p-6">
+                <h1 className="p-6 text-xl font-semibold">{appName}</h1>
+                <section className="grid w-full flex-1 place-items-center p-6">
                     <GenericError />
+                </section>
+            </DashboardTemplate>
+        )
+    }
+
+    if (!data?.data.length) {
+        return (
+            <DashboardTemplate title={pageTitle}>
+                <h1 className="p-6 text-xl font-semibold">{appName}</h1>
+
+                <section className="grid w-full flex-1 place-items-center p-6">
+                    <EmptyState />
                 </section>
             </DashboardTemplate>
         )
