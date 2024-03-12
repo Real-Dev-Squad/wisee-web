@@ -25,9 +25,9 @@ export const Dashboard = () => {
             <DashboardTemplate title={pageTitle}>
                 <section className="w-full p-6">
                     <div className="flex items-center gap-2 pb-8">
-                        <Shimmer className="w-24" />
-                        <Shimmer className="flex-1" />
-                        <Shimmer className="w-11 shrink-0" />
+                        <Shimmer className="h-8 w-24 lg:hidden" />
+                        <Shimmer className="ml-auto h-8 w-full lg:h-9 lg:w-72" />
+                        <Shimmer className="h-8 w-11 shrink-0 lg:h-9 lg:w-32" />
                     </div>
 
                     <div className="space-y-2">
