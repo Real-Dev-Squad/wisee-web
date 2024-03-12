@@ -34,7 +34,7 @@ export const Navbar = () => {
         <nav className="fixed bottom-2 left-0 w-full p-4 lg:relative lg:h-full lg:w-56 lg:border-r lg:border-stone-200  lg:px-2 xl:w-60">
             <h1 className="hidden px-2 py-4 text-2xl font-semibold text-stone-900 lg:block">{appName}</h1>
 
-            <ul className="mx-auto flex w-max justify-center gap-2 rounded-full bg-stone-100 px-2 py-1.5 lg:w-full lg:flex-col lg:bg-transparent">
+            <ul className="mx-auto flex w-max justify-center gap-2 rounded-full border border-stone-100 bg-stone-100 p-2 shadow-lg shadow-stone-200 lg:w-full lg:flex-col lg:border-none lg:bg-transparent lg:shadow-none">
                 {NAVBAR_LINKS.map((link, index) => (
                     <li key={index} className="w-max lg:w-full">
                         <NavbarLink title={link.title} href={link.href} isActive={pathname.startsWith(link.href)} />
