@@ -18,22 +18,22 @@ export const SignUpPage = () => {
             </Head>
 
             <header>
-                <div className="px-4 h-16 lg:px-8 flex items-center max-w-7xl mx-auto">
+                <div className="mx-auto flex h-16 max-w-7xl items-center px-4 lg:px-8">
                     <h1 className="text-xl font-semibold text-stone-900">{process.env.NEXT_PUBLIC_APP_NAME}</h1>
                 </div>
             </header>
 
             <main>
-                <section className="px-6 py-20 lg:p-8 space-y-6 max-w-sm lg:py-32 lg:space-y-10 mx-auto">
-                    <h2 className="text-4xl font-bold text-center lg:text-5xl text-stone-900">Sign Up</h2>
+                <section className="mx-auto max-w-sm space-y-6 px-6 py-20 lg:space-y-10 lg:p-8 lg:py-32">
+                    <h2 className="text-center text-4xl font-bold text-stone-900 lg:text-5xl">Sign Up</h2>
 
                     <div>
                         <Button
                             variant="ghost"
                             onClick={handleSignUp}
-                            className="bg-stone-100 w-full hover:bg-stone-200 border border-stone-200"
+                            className="w-full border border-stone-200 bg-stone-100 hover:bg-stone-200"
                         >
-                            <GoogleLogoIcon className="w-5 h-5" />
+                            <GoogleLogoIcon className="h-5 w-5" />
                             <p className="text-medium text-stone-800">SignUp with Google</p>
                         </Button>
                     </div>
