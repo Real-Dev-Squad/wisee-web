@@ -1,6 +1,6 @@
-import { TSidebarLink } from "./sidebar.types";
+import { TNavbarLink } from "./navbar.types";
 
-export const SIDEBAR_LINKS: TSidebarLink[] = [
+export const NAVBAR_LINKS: TNavbarLink[] = [
     {
         title: "Home",
         href: "/dashboard",

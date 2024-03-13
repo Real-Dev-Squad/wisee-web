@@ -1,28 +1,34 @@
-import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import "@testing-library/jest-dom"
+import { render, screen } from "@testing-library/react"
+import dayjs from "dayjs"
 
-import { ROUTES } from '@/routes'
-import { formatRoute } from '@/utils/format-route/format-route.util'
+import { DateTimeFormatEnum } from "@/enums/datetime-format.enum"
+import { ROUTES } from "@/routes"
+import { formatRoute } from "@/utils/format-route/format-route.util"
 
-import { FormCard } from '../form-card'
+import { FormCard } from "../form-card"
 
-describe('Form Card', () => {
+describe("Form Card", () => {
     it("render the form card", () => {
-        render(<FormCard id={1} title="dummy form title" updated_at={"Edited 12hours ago"} status={'draft'} />)
-        const element = screen.getByTestId('form_card')
+        render(<FormCard id={1} title="dummy form title" updated_at={"Edited 12hours ago"} status={"draft"} />)
+        const element = screen.getByTestId("formCard")
 
         expect(element).toBeInTheDocument()
     })
 
     it("check if id, title, status & updated_at gets applied", () => {
-        render(<FormCard id={1} title="dummy form title" updated_at={"Edited 12hours ago"} status={'draft'} />)
-        const element = screen.getByTestId('form_card')
-        const anchorLink = screen.getByRole('link')
+        const currentDate = new Date("Sun Jan 07 2024 16:05:19 GMT+0000").toISOString()
+        const formattedDate = dayjs(currentDate).format(DateTimeFormatEnum.ddMmYyyWithSlash)
 
-        expect(element).toBeInTheDocument()
-        expect(element).toHaveTextContent('dummy form title')
-        expect(element).toHaveTextContent('draft')
-        expect(element).toHaveTextContent('Edited 12hours ago')
-        expect(anchorLink).toHaveAttribute('href', formatRoute(ROUTES.forms.edit, { id: 1 }))
+        render(<FormCard id={1} title="dummy form title" updated_at={currentDate} status={"draft"} />)
+        const formCard = screen.getByTestId("formCard")
+        const updatedAtTime = screen.getByTestId("updatedAtTime")
+        const anchorLink = screen.getByRole("link")
+
+        expect(formCard).toBeInTheDocument()
+        expect(formCard).toHaveTextContent("dummy form title")
+        expect(formCard).toHaveTextContent("draft")
+        expect(updatedAtTime).toHaveTextContent(formattedDate)
+        expect(anchorLink).toHaveAttribute("href", formatRoute(ROUTES.forms.edit, { id: 1 }))
     })
 })
